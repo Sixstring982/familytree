@@ -4,45 +4,53 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 const checkAuth = () => {
     gapi.auth.authorize({
-	    client_id: CLIENT_ID,
-	    scope: SCOPES.join(' '),
-	    immediate: true,
-	}, handleAuthResult);
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        immediate: true,
+    }, handleAuthResult);
 };
 
 const handleAuthResult = authResult => {
     const authorizeDiv = document.getElementById('authorize-div');
     if (authResult && !authResult.error) {
-	authorizeDiv.style.display = 'none';
-	loadSheetsApi();
+        authorizeDiv.style.display = 'none';
+        loadSheetsApi();
     } else {
-	authorizeDiv.style.display = 'inline';
+        authorizeDiv.style.display = 'inline';
     }
 };
 
 const handleAuthClick = event => {
     gapi.auth.authorize({
-	    client_id: CLIENT_ID,
-	    scope: SCOPES,
-	    immediate: false,
-	}, handleAuthResult);
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        immediate: false,
+    }, handleAuthResult);
     return false;
 };
 
+const setLoadingVisible = visible => {
+    const visStr = visible ? 'block' : 'none';
+    document.getElementById('loading-overlay').style.display = visStr;
+
+}
+
 const printData = result => {
+    setLoadingVisible(false);
     console.log(result);
+};
+
+
+const loadSheetData = sheetHandler => {
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: '1Vj9W2WfvG860sqfrBZReS9wp6pulPGGOKuESkNlkGUU',
+        range: 'Tree!B4:F11',
+    }).then(sheetHandler);
 };
 
 const loadSheetsApi = () => {
     const discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
-    gapi.client.load(discoveryUrl).then(loadSheetData(printData));
-};
-
-const loadSheetData = sheetHandler => {
-    gapi.client.sheets.spreadsheets.values.get({
-	    spreadsheetId: '1Vj9W2WfvG860sqfrBZReS9wp6pulPGGOKuESkNlkGUU',
-	    range: 'Tree!B4:F11',
-	}).then(sheetHandler);
+    gapi.client.load(discoveryUrl).then(() => loadSheetData(printData));
 };
 
 const appendPre = message => {

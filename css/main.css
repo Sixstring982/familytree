@@ -1,0 +1,39 @@
+.spinner {
+    width: 100px;
+    height: 100px;
+    background-color: orangered;
+    animation: example 3s infinite ease-in-out;
+}
+
+@keyframes anim {
+    0% {
+        transform: rotateX(0) rotateY(0);
+        border-radius: 0;
+        background-color: orangered;
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(360deg);
+        border-radius: 50%;
+        background-color: steelblue;
+    }
+    100% {
+        transform: rotateX(0) rotateY(0);
+        border-radius: 0;
+        background-color: orangered;
+    }
+}
+
+@keyframes example {
+    0% {
+        transform: rotateX(0);
+        border-radius: 0;
+    }
+    50% {
+        transform: rotateX(180deg);
+        border-radius: 50%;
+    }
+    100% {
+        transform: rotateX(0);
+        border-radius: 0;
+    }
+}
