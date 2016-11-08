@@ -1,39 +1,118 @@
+body {
+     background-color: #607d8b;
+}
+
+.link {
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.link.mother {
+  stroke: violet;
+}
+
+.link.father {
+  stroke: steelblue;
+}
+
+.link.spouse {
+  stroke: green;
+}
+
+.label {
+  pointer-events: none;
+  font-size: 0.3em;
+}
+
+.self .label, 
+.selected .label {
+  font-size: 1em;
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(0, 0, 0, 1);
+  stroke-width: 1px;
+}
+
+.node {
+  fill: rgba(0, 0, 0, 1);
+  stroke: rgba(0, 0, 0, 1);
+}
+
+.node.selected {
+  fill: rgba(255, 255, 255, 1);
+}
+
+.node.dist-1 {
+  fill: rgba(200, 200, 200, 1);
+}
+
+.node.dist-2 {
+  fill: rgba(150, 150, 150, 1);
+}
+
+.node.dist-3 {
+  fill: rgba(100, 100, 100, 1);
+}
+
+.node.dist-3 {
+  fill: rgba(50, 50, 50, 1);
+}
+
+.node.self {
+  fill: rgba(0, 0, 255, 1);
+}
+
+.node.parent {
+  fill: rgba(255, 0, 0, 1);
+}
+
+.node.sibling {
+  fill: rgba(0, 255, 0, 1);
+}
+
+.node.aunt-uncle {
+  fill: rgba(0, 255, 255, 1);
+}
+
+.node.grandparent {
+  fill: rgba(255, 0, 255, 1);
+}
+
+.node.cousin {
+  fill: rgba(255, 255, 128, 1);
+}
+
+.node.child {
+  fill: rgba(255, 128, 255, 1);
+}
+
+.node.grandchild {
+  fill: rgba(128, 128, 255, 1);
+}
+
+.node.great-grandparent {
+  fill: rgba(128, 128, 128, 1);
+}
+
+.node.great-grandchild {
+  fill: rgba(128, 0, 255, 1);
+}
+
 .spinner {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     background-color: orangered;
-    animation: example 3s infinite ease-in-out;
+    animation: anim 3s infinite ease-in-out;
 }
 
 @keyframes anim {
-    0% {
-        transform: rotateX(0) rotateY(0);
+    0%, 100% {
+        transform: rotateX(0);
         border-radius: 0;
         background-color: orangered;
     }
-    50% {
-        transform: rotateX(180deg) rotateY(360deg);
+    75% {
+        transform: rotate(180deg);
         border-radius: 50%;
         background-color: steelblue;
-    }
-    100% {
-        transform: rotateX(0) rotateY(0);
-        border-radius: 0;
-        background-color: orangered;
-    }
-}
-
-@keyframes example {
-    0% {
-        transform: rotateX(0);
-        border-radius: 0;
-    }
-    50% {
-        transform: rotateX(180deg);
-        border-radius: 50%;
-    }
-    100% {
-        transform: rotateX(0);
-        border-radius: 0;
     }
 }

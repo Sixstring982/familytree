@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 <link rel="stylesheet" href="css/main.css">
+<title>Trent's Family Tree</title>
 <script src="js/main.js"></script>
 <script src="https://apis.google.com/js/client.js"></script>
-<div id="authorize-div" style="display: none">
-  <span>Authorize access to Google Sheets API</span>
-  <button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.js" integrity="sha256-ox57g7xDG2+u4m2GCYcLCMDZGL7H/gp3G7te9+O6WDE=" crossorigin="anonymous"></script>
+<nav>
+  <div class="nav-wrapper">
+    <a href="javascript:void(0);" class="brand-logo">Trent's Family Tree</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="row" id="authorize-div" style="display: none;">
+    <div class="col s4 offset-s4">
+      <div class="card white">
+        <div class="card-content black-text">
+          <span class="card-title">Authorize Google Seets?</span>
+          <button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="loading-overlay">
+    <div class="col s4 offset-s4">
+      <div class="card white">
+        <div class="card-content black-text">
+          <div class="row">
+            <div class="col s8">
+              <span class="card-title">Loading</span>
+            </div>
+            <div class="col s4">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="svg-wrapper" style="display: none;">
+    <div class="col s10">
+      <div class="card white">
+        <div class="card-content">
+          <svg id="root"></svg>
+        </div>
+      </div>
+    </div>
+    <div class="col s2" id="info-instruction-wrapper">
+      <div class="card white"> 
+        <div class="card-content black-text">
+          Click a node for more information.
+        </div>
+      </div>
+    </div>
+    <div class="col s2" id="info-wrapper" style="display: none;">
+      <div class="card white" id="info-wrapper">
+        <div class="card-content black-text">
+          <span id="info-name" class="card-title">Name</span>
+          <div id="info-blurb" class="blurb">Blurb</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="loading-overlay">
-  loading...
-  <div class="spinner"></div>
-<div>
